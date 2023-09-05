@@ -103,6 +103,10 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erb-formatter (0.4.3)
       syntax_tree (~> 6.0)
     erubi (1.12.0)
@@ -289,11 +293,8 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
-<<<<<<< HEAD
     warden (1.2.9)
       rack (>= 2.0.9)
-=======
->>>>>>> e1336d6 (update: gem installation & database setup)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -319,12 +320,9 @@ DEPENDENCIES
   bootstrap (~> 5.2, >= 5.2.3)
   capybara
   debug
-<<<<<<< HEAD
   devise (~> 4.9, >= 4.9.2)
-  erb-formatter (~> 0.4.3)
-=======
   dotenv-rails (~> 2.8, >= 2.8.1)
->>>>>>> e1336d6 (update: gem installation & database setup)
+  erb-formatter (~> 0.4.3)
   factory_bot (~> 6.2, >= 6.2.1)
   factory_bot_rails (~> 6.2)
   faker (~> 3.2, >= 3.2.1)

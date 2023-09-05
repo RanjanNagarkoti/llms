@@ -48,14 +48,40 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# Bootstrap 5
+gem 'bootstrap', '~> 5.2', '>= 5.2.3'
+
+# Use Sass to process CSS
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
+
+# User Authentication and Management
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  # Rspec & Factorybot
+  gem 'rspec', '~> 3.12'
+  gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
+  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Fake data generator
+  gem 'faker', '~> 3.2', '>= 3.2.1'
+
+  # Rubocop for formatting code
+  gem 'rubocop', '~> 1.56'
+
+  # Erb syntax formatter
+  gem 'erb-formatter', '~> 0.4.3'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

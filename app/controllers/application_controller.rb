@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
       'admin'
     elsif current_user&.user? || current_user&.presenter?
       'application'
+    elsif devise_controller?
+      'authentication'
     end
   end
 end

@@ -1,0 +1,49 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white px-3">
+    <div class="container-fluid">
+      <a class="navbar-brand bajra-text-primary" href="/">LLMS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        </ul>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <% if user_signed_in? %>
+            <div class="d-flex align-items-center">
+              <% if !current_user.avatar.attached? %>
+                <span
+                  class="
+                    me-2
+                    p-2
+                    rounded-pill
+                    align-self-center
+                    h6
+                  "
+                  style="background-color: #FBDCD3; color: #BE263B;"
+                >
+                  <%= current_user.first_name.capitalize()[0] %><%= current_user.last_name.capitalize()[0] %></span>
+              <% else %>
+                <image src="<%= (url_for(current_user.avatar))%>" class="rounded-pill" style="width: 30px; height: 30px; object-fit: cover;">
+              <% end %>
+              <%= button_to " Logout",
+              destroy_user_session_path,
+              class: "btn btn-danger ms-2",
+              method: :delete %>
+            </div>
+          <% else %>
+            <%= link_to "login", new_user_session_path %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

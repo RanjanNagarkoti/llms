@@ -1,0 +1,8 @@
+<% flash.each do |flash_type, message| %>
+  <div 
+    class="flash__message bg-dark text-white p-3 rounded mt-2"
+    data-controller="removals"
+    data-action="animationend->removals#remove">
+    <p class="fw-normal"><span class="rounded-pill p-1 px-2 bg-success text-white"><i class="fa-solid fa-check fa-sm"></i></span>&ensp;<%= message %></p>
+  </div>
+<% end %>

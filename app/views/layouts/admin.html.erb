@@ -10,8 +10,18 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="background-color: whitesmoke;">
+  <body style="background-color: whitesmoke;" class="m-auto">
     <%= render partial: "layouts/shared/user_nav" %>
-    <%= yield %>
+
+    <div class=" row m-auto container-fluid px-3" style="max-width: 1920px;">
+      <div class="col-2 p-0 m-0">
+        <%= render partial: "layouts/shared/admin_sidebar" %>
+      </div>
+      <div class="col-10 my-3 ps-5 rounded ">
+        <% if user_signed_in? && current_user&.admin? %>
+          <%= yield %>
+        <% end %>
+      </div>
+    </div>
   </body>
 </html>

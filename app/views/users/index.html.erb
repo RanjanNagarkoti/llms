@@ -11,22 +11,36 @@
     "
     style="min-height: 75vh;"
   >
-    <table class="table bg-success">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Username</th>
-          <th scope="col">Email</th>
-          <th scope="col">Role</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @users %>
-      </tbody>
-    </table>
+    <div>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="bajra-text-primary">Users List</h2>
+        <div>
+          <%= link_to root_path, class: "btn btn-sm btn-primary" do %>
+            <i class="fa-solid fa-arrow-left"></i>
+            Go Back
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render @users %>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <nav aria-label="Page navigation example position-absolute bottom-0">
       <ul class="pagination justify-content-center">
         <li class="page-item <%= 'disabled' if @pagy.prev.nil? %>">

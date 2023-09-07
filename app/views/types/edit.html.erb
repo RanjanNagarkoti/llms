@@ -1,0 +1,7 @@
+ <%= link_to sanitize("&larr; Back to quote"), types_path(@type) %>
+<div class="header">
+  <h1>Edit Type</h1>
+</div>
+<%= turbo_frame_tag "type_#{@type.id}" do %>
+  <%= render "form", type: @type %>
+<% end %>

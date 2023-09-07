@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white px-3 mb-3">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white px-3 mb-3">
     <div class="container-fluid">
       <a class="navbar-brand bajra-text-primary" href="/">LLMS</a>
       <button
@@ -33,17 +33,17 @@
                   <%= current_user.first_name.capitalize()[0] %><%= current_user.last_name.capitalize()[0] %></span>
               <% else %>
                 <image src="<%= (url_for(current_user.avatar))%>" class="rounded-pill" style="width: 30px; height: 30px; object-fit: cover;">
-              <% end %>
-              <%= button_to " Logout",
+                <% end %>
+                <%= button_to " Logout",
               destroy_user_session_path,
               class: "btn btn-danger ms-2",
               method: :delete %>
-            </div>
-          <% else %>
-            <%= link_to "login", new_user_session_path %>
-          <% end %>
-        </ul>
+              </div>
+            <% else %>
+              <%= link_to "login", new_user_session_path %>
+            <% end %>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>

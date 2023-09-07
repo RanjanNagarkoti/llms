@@ -12,6 +12,7 @@
     m-2
     my-3
   "
+  style="max-height: 90vh; position:fixed; width: 300px"
 >
   <%= image_tag "logo/Bajra-logo.png", class: "img-fluid" %>
   <hr>
@@ -36,7 +37,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <%= link_to category_index_path, class: "nav-link link-dark" do %>
+      <%= link_to types_path , class: "nav-link link-dark" do %>
         <i class="fa-solid fa-table-cells-large bi me-2"></i>
         Event Categories
       <% end %>

@@ -1,0 +1,38 @@
+<div class="container-fluid bg-white rounded border">
+  <div id="flash" class="flash">
+    <%= render "layouts/shared/flash" %>
+  </div>
+  <div class="header d-flex justify-content-between align-items-center p-2">
+    <h2>Event Types List</h2>
+    <diV>
+      <%= link_to new_type_path, class: "btn btn-sm btn-primary", data: {turbo_frame: dom_id(Type.new)} do %>
+        <i class="fa-solid fa-plus bi me-2"></i>
+        New Event Type
+      <% end%>
+    </diV>
+  </div>
+  <hr class="text-muted">
+  <%= turbo_frame_tag Type.new %>
+  <%= turbo_frame_tag "types" do %>
+    <%= render @types %>
+  <% end %>
+  <nav aria-label="Page navigation example position-absolute bottom-0">
+    <ul class="pagination justify-content-center">
+      <li class="page-item <%= 'disabled' if @pagy.prev.nil? %>">
+        <%= if @pagy.prev
+            link_to "Previous", pagy_url_for(@pagy, @pagy.prev), class: "page-link"
+          end %>
+      </li>
+      <% @pagy.series.each do |item| %>
+        <li class="page-item <%= 'active' if item == @pagy.page %>">
+          <%= link_to item, pagy_url_for(@pagy, item), class: "page-link" %>
+        </li>
+      <% end %>
+      <li class="page-item <%= 'disabled' if @pagy.next.nil? %>">
+        <%= if @pagy.next
+            link_to "Next", pagy_url_for(@pagy, @pagy.next), class: "page-link"
+          end %>
+      </li>
+    </ul>
+  </nav>
+</div>

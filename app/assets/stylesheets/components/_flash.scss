@@ -1,0 +1,17 @@
+.flash {
+  position: fixed;
+  bottom: 5vh   ;
+  right: 0%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 100%;
+  width: max-content;
+
+  &__message {
+    animation: appear-then-fade 4s both;
+  }
+}

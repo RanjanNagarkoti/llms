@@ -1,48 +1,60 @@
-<div class="row bg-white p-3 rounded border">
-  <div class="col-3 text-center">
-    <%= image_tag (url_for(@user.avatar)),
-    style: "width: 250px; height: 250px; object-fit: cover;",
-    class: "rounded-pill img-fluid img-thumbnail p-3" %>
-    <h3 class="my-3"><%= @user.first_name.capitalize() %>
-      <%= @user.last_name.capitalize() %></h3>
-    <div class="d-flex justify-content-center">
-      <% if @user.role == 'presenter' %>
-        <button class="btn btn-outline-primary ms-2">Revoke</button>
+<div class="bg-white p-3 rounded border">
+  <div class=" d-flex justify-content-between align-items-center p-2 ">
+    <h2>Users Details</h2>
+    <div>
+      <%= link_to users_path, class: "btn btn-sm btn-primary" do %>
+        <i class="fa-solid fa-arrow-left"></i>
+        Go Back
       <% end %>
     </div>
   </div>
-  <div class="col-8 ms-5">
-    <table class="table">
-      <tbody>
-        <tr>
-          <th scope="row" class="pb-3">User ID</th>
-          <td><%= @user.id %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="pb-3">First Name</th>
-          <td><%= @user.first_name %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="pb-3">Last Name</th>
-          <td><%= @user.last_name %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="pb-3">Username</th>
-          <td><%= @user.username %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="pb-3">Email</th>
-          <td><%= @user.email %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="pb-3">Role</th>
-          <td><%= @user.role %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="pb-3">Joined Date</th>
-          <td><%= @user.created_at.to_s[0, 10] %></td>
-        </tr>
-      </tbody>
-    </table>
+  <hr class="my-3">
+  <div class="row my-3">
+    <div class="col-3 text-center">
+      <%= image_tag (url_for(@user.avatar)),
+      style: "width: 250px; height: 250px; object-fit: cover;",
+      class: "rounded-pill img-fluid img-thumbnail p-3" %>
+      <h3 class="my-3"><%= @user.first_name.capitalize() %>
+        <%= @user.last_name.capitalize() %></h3>
+      <div class="d-flex justify-content-center">
+        <% if @user.role == 'presenter' %>
+          <button class="btn btn-outline-primary ms-2">Revoke</button>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-8 ms-5">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row" class="pb-3">User ID</th>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="pb-3">First Name</th>
+            <td><%= @user.first_name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="pb-3">Last Name</th>
+            <td><%= @user.last_name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="pb-3">Username</th>
+            <td><%= @user.username %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="pb-3">Email</th>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="pb-3">Role</th>
+            <td><%= @user.role %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="pb-3">Joined Date</th>
+            <td><%= @user.created_at.to_s[0, 10] %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

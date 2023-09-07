@@ -12,8 +12,9 @@
     m-2
     my-3
   "
+  style="max-height: 90vh; position:fixed; width: 300px"
 >
-  <%= image_tag "logo/Bajra-logo.png" %>
+  <%= image_tag "logo/Bajra-logo.png", class: "img-fluid" %>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto mb-5">
     <li class="nav-item">
@@ -23,7 +24,7 @@
       <% end %>
     </li>
     <li>
-      <a href="#" class="nav-link link-dark">
+      <a href="#" class="nav-link link-dark text-nowrap">
         <i class="fa-solid fa-gauge bi me-2"></i>
         Dashboard
       </a>
@@ -34,6 +35,12 @@
         <i class="fa-solid fa-calendar-days bi me-2"></i>
         Event
       </a>
+    </li>
+    <li class="nav-item">
+      <%= link_to types_path , class: "nav-link link-dark" do %>
+        <i class="fa-solid fa-table-cells-large bi me-2"></i>
+        Event Categories
+      <% end %>
     </li>
     <li>
       <%= link_to users_path, class: "nav-link link-dark" do %>

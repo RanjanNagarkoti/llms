@@ -1,0 +1,11 @@
+<main class="container">
+  <div class="mt-2">
+    <%= link_to sanitize("&larr; Back to quotes"), types_path %>
+  </div>
+  <div class="header mt-2">
+    <h1>New Event Type</h1>
+  </div>
+  <%= turbo_frame_tag @type do %>
+    <%= render "form", type: @type %>
+  <% end %>
+</main>

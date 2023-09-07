@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "types", partial: "types/type", locals: { type: @type } %>
+<%= turbo_stream.update Type.new, "" %>
+<%= turbo_stream.prepend "flash", partial: "layouts/shared/flash" %>

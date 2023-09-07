@@ -86,6 +86,9 @@ group :development do
   # Erb syntax formatter
   gem 'erb-formatter', '~> 0.4.3'
 
+# HTML Beautifier
+  gem 'htmlbeautifier', '~> 1.4', '>= 1.4.2'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

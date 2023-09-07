@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   root 'pages#index'
   resources :users, only: %i[index show destroy], constraints: AdminConstraint.new
   scope :event do
-    resources :types, as: 'category', constraints: AdminConstraint.new
+    resources :types, constraints: AdminConstraint.new
   end
 end

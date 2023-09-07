@@ -1,0 +1,67 @@
+<div
+  class="
+    d-flex
+    flex-column
+    flex-shrink-0
+    p-3
+    bg-white
+    h-100
+    border-top
+    border
+    rounded
+    m-2
+    my-3
+  "
+>
+  <%= image_tag "logo/Bajra-logo.png" %>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto mb-5">
+    <li class="nav-item">
+      <%= link_to root_path, class: "nav-link link-dark" do %>
+        <i class="fa-solid fa-house bi me-2"></i>
+        Home
+      <% end %>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-dark">
+        <i class="fa-solid fa-gauge bi me-2"></i>
+        Dashboard
+      </a>
+    </li>
+    <hr>
+    <li>
+      <a href="#" class="nav-link link-dark">
+        <i class="fa-solid fa-calendar-days bi me-2"></i>
+        Event
+      </a>
+    </li>
+    <li>
+      <%= link_to users_path, class: "nav-link link-dark" do %>
+        <i class="fa-solid fa-user bi me-2"></i>
+        Users
+      <% end %>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-dark">
+        <i class="fa-solid fa-gear bi me-2"></i>
+        Setting
+      </a>
+    </li>
+  </ul>
+
+  <hr class="mt-5">
+  <ul class=" nav d-flex flex-row justify-content-around ">
+    <li class="h4">
+      <a href="#" class="link-dark"><i class="fa-brands fa-facebook"></i></a>
+    </li>
+    <li class="h4">
+      <a href="#" class="link-dark"><i class="fa-brands fa-instagram"></i></a>
+    </li>
+    <li class="h4">
+      <a href="#" class="link-dark"><i class="fa-brands fa-linkedin"></i></a>
+    </li>
+    <li class="h4">
+      <a href="#" class="link-dark"><i class="fa-brands fa-youtube"></i></a>
+    </li>
+  </ul>
+</div>

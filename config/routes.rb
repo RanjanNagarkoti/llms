@@ -4,8 +4,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'pages#index'
-  resources :users, only: %i[index show destroy], constraints: AdminConstraint.new
-  scope :event do
-    resources :types, constraints: AdminConstraint.new
+
+  constraints(AdminConstraint.new) do
+    resources :users, only: %i[index show destroy]
+
+    scope :event do
+      resources :types
+    end
+
+    resources :events
   end
 end

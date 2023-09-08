@@ -1,0 +1,20 @@
+<%= render @events %>
+<nav aria-label="Page navigation example position-absolute bottom-0">
+  <ul class="pagination justify-content-center">
+    <li class="page-item <%= 'disabled' if @pagy.prev.nil? %>">
+      <%= if @pagy.prev
+            link_to "Previous", pagy_url_for(@pagy, @pagy.prev), class: "page-link"
+          end %>
+    </li>
+    <% @pagy.series.each do |item| %>
+      <li class="page-item <%= 'active' if item == @pagy.page %>">
+        <%= link_to item, pagy_url_for(@pagy, item), class: "page-link" %>
+      </li>
+    <% end %>
+    <li class="page-item <%= 'disabled' if @pagy.next.nil? %>">
+      <%= if @pagy.next
+            link_to "Next", pagy_url_for(@pagy, @pagy.next), class: "page-link"
+          end %>
+    </li>
+  </ul>
+</nav>

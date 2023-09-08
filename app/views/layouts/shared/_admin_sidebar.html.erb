@@ -31,10 +31,10 @@
     </li>
     <hr>
     <li>
-      <a href="#" class="nav-link link-dark">
+      <%= link_to events_path , class: "nav-link link-dark" do %>
         <i class="fa-solid fa-calendar-days bi me-2"></i>
         Event
-      </a>
+      <% end %>
     </li>
     <li class="nav-item">
       <%= link_to types_path , class: "nav-link link-dark" do %>
@@ -55,7 +55,6 @@
       </a>
     </li>
   </ul>
-
   <hr class="mt-5">
   <ul class=" nav d-flex flex-row justify-content-around ">
     <li class="h4">

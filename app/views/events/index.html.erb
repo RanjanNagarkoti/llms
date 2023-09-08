@@ -1,3 +1,16 @@
+<div class="d-flex justify-content-between align-items-center rounded bg-white p-3 mb-3">
+  <h2 class="bajra-text-primary">Events</h2>
+  <div class="d-flex">
+    <%= link_to new_event_path, class: "btn btn-sm btn-secondary me-2" do %>
+      <i class="fa-solid fa-plus me-2"></i>
+      Create
+    <% end %>
+    <%= link_to root_path, class: "btn btn-sm btn-primary me-2" do %>
+      <i class="fa-solid fa-arrow-left me-2"></i>
+      Go Back
+    <% end %>
+  </div>
+</div>
 <%= render @events %>
 <nav aria-label="Page navigation example position-absolute bottom-0">
   <ul class="pagination justify-content-center">

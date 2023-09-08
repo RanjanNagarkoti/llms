@@ -9,7 +9,7 @@
         <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= event.duration %> hrs</p>
       </div>
       <div class="mb-1 text-muted"> <span class="badge bg-success text-white"><%= event.status.capitalize %></span> </div>
-      <p class="card-text mb-auto"> <%= truncate(event.description, length: 550) %> </p>
+      <p class="card-text mb-auto lead"> <%= truncate(event.description, length: 250) %> </p>
       <div class="mb-1 text-muted"><i class="fa-solid fa-location-dot me-2"></i><%= event.location %></div>
       <div class="my-2">
         <%= link_to event_path(event), class: 'btn btn-primary btn-sm' do%>

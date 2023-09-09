@@ -22,4 +22,8 @@ class PagesController < ApplicationController
              .order('COUNT(events.type_id) DESC')
              .limit(5)
   end
+
+  def show
+    @event = Event.find_by(id: params[:id], visibility: 'event_public')
+  end
 end

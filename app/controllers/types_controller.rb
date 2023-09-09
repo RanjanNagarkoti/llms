@@ -38,11 +38,17 @@ class TypesController < ApplicationController
   end
 
   def destroy
-    @type.destroy
-
-    respond_to do |format|
-      format.html { redirect_to types_path, notice: 'Record deleted successfully.' }
-      format.turbo_stream { flash.now[:notice] = 'Record deleted successfully.' }
+    if @type.events.empty?
+      @type.destroy
+      respond_to do |format|
+        format.html { redirect_to types_path, notice: 'Record deleted successfully.' }
+        format.turbo_stream { flash.now[:notice] = 'Record deleted successfully.' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to types_path, alert: 'Record is still referenced by events and cannot be deleted.' }
+        format.turbo_stream { flash.now[:alert] = 'Record is still referenced by events and cannot be deleted.' }
+      end
     end
   end
 

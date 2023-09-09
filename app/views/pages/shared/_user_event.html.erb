@@ -1,0 +1,25 @@
+<% events.each do |event| %>
+  <div class="col-12 bg-white">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-primary"><i class="fa-solid fa-people-group me-2 text-dark"></i><%= event.type.name %></strong>
+        <h3 class="mb-0"><%= event.title%></h3>
+        <div class="my-1 text-muted d-flex">
+          <p><i class="fa-solid fa-calendar-days me-2"></i><%= event.date.strftime("%B %d, %Y") %></p>
+          <p class="ms-3"><i class="fa-solid fa-clock me-2"></i><%= event.time.strftime("%H:%M") %></p>
+          <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= event.duration %> hrs</p>
+        </div>
+        <div class="mb-1 text-muted"> <span class="badge bg-success text-white"><%= event.status.capitalize %></span> </div>
+        <p class="card-text mb-auto"><%= truncate(event.description, length: 150) %> </p>
+        <div class="mb-1 text-muted"><i class="fa-solid fa-location-dot me-2"></i><%= event.location %></div>
+        <div class="my-2">
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+      </div>
+      <div class="col-auto d-none d-lg-block position-relative h-md-250">
+        <%= image_tag (url_for(event.cover_picture)),
+      style: "width: 300px; height: 100%; object-fit: cover; object-position: center top" %>
+      </div>
+    </div>
+  </div>
+<% end %>

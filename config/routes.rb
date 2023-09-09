@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
     resources :events
   end
+
+  # Routes for users & presenters
+  get '/events', to: 'pages#event', as: :user_home
 end

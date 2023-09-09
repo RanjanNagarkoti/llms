@@ -8,15 +8,15 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
-  <body style="background-color: whitesmoke;" class="m-auto">
+  <body class="m-auto">
     <%= render partial: "layouts/shared/user_nav" %>
     <div class=" row m-auto container-fluid px-3 mt-5" style="max-width: 1920px;">
       <div class="col-lg-2 col-sm-3 p-0 m-0">
         <%= render partial: "layouts/shared/admin_sidebar" %>
       </div>
       <div class="col-lg-10 col-sm-9 my-3 ps-5 rounded ">
-          <%= render "layouts/shared/flash" %>
-          <%= yield %>
+        <%= render "layouts/shared/flash" %>
+        <%= yield %>
       </div>
     </div>
   </body>

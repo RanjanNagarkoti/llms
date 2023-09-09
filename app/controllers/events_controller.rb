@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show]
+  before_action :set_event, only: %i[show edit update destroy]
 
   def index
     @pagy, @events = pagy(Event.all.order(created_at: :desc))
@@ -21,6 +21,21 @@ class EventsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit; end
+
+  def update
+    if @event.update(event_params)
+      redirect_to event_path(@event), notice: 'Record updated successfully.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @event.destroy
+    redirect_to events_path, notice: 'Record deleted successfully.'
   end
 
   private

@@ -1,0 +1,113 @@
+<%# Hero Section %>
+<div class="text-center bg-image mb-2 hero-section">
+  <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.5);">
+    <div class="d-flex justify-content-center align-items-end h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Bajra Beings</h1>
+        <h4 class="mb-3">Lunch & Learn Management System</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<%# End of hero section %>
+<%# Upcoming events %>
+<% if @upcomings %>
+  <div class="row mb-2 mt-5">
+    <div class="d-flex justify-content-between">
+      <h3 class="mb-2">Upcoming Events</h3>
+      <div>
+        <%= link_to root_path, class: 'btn btn-sm btn-primary' do %>
+          View more
+          <i class="fa-solid fa-arrow-right ms-2"></i>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <hr>
+    </div>
+    <% @upcomings.each do |upcoming|%>
+      <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary"><i class="fa-solid fa-people-group me-2 text-dark"></i><%= upcoming.type.name %></strong>
+            <h3 class="mb-0"><%= upcoming.title %></h3>
+            <div class="mb-1 text-muted"><i class="fa-solid fa-calendar-days me-2"></i><%= upcoming.date.strftime("%B %d, %Y") %></div>
+            <div class="mb-1 text-muted"><i class="fa-solid fa-clock fa-beat me-2"></i><%= upcoming.time.strftime("%H:%M") %></div>
+            <p class="card-text mb-auto"><%= truncate(upcoming.description, length: 80) %> </p>
+            <a href="#" class="stretched-link">Continue reading</a>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <%= image_tag (url_for(upcoming.cover_picture)),
+                style: "width: 200px; height: 250px; object-fit: cover; object-position: center top",
+                class: "img-fluid"
+              %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<%# End fo upcoming events %>
+<%# All events list %>
+<div class="row g-5">
+  <div class="col-md-8">
+    <h3 class="pb-4 mb-4 border-bottom">Events</h3>
+    <%= render partial: 'pages/shared/user_event', locals: {events: @events} %>
+    <nav aria-label="Page navigation example position-absolute bottom-0">
+      <ul class="pagination justify-content-center">
+        <li class="page-item <%= 'disabled' if @pagy.prev.nil? %>">
+          <%= if @pagy.prev
+            link_to "Previous", pagy_url_for(@pagy, @pagy.prev), class: "page-link"
+          end %>
+        </li>
+        <% @pagy.series.each do |item| %>
+          <li class="page-item <%= 'active' if item == @pagy.page %>">
+            <%= link_to item, pagy_url_for(@pagy, item), class: "page-link" %>
+          </li>
+        <% end %>
+        <li class="page-item <%= 'disabled' if @pagy.next.nil? %>">
+          <%= if @pagy.next
+            link_to "Next", pagy_url_for(@pagy, @pagy.next), class: "page-link"
+          end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-4">
+    <div class="position-sticky" style="top: 2rem">
+      <div class="p-4 mb-3 bg-light rounded">
+        <h4 class="fst-italic">About</h4>
+        <p class="mb-0">
+          Knowledge sharing means the exchange of employees' knowledge, skills, and experiences.
+          It ensures that the knowledge within an organization is available for employees whenever
+          they need it, and its benefits include retaining intellectual assets and improving productivity.
+        </p>
+      </div>
+      <div class="p-4">
+        <h4 class="fst-italic">Event Types</h4>
+        <ol class="list-unstyled mb-0 d-flex flex-wrap">
+          <% @types.each do |type| %>
+            <li><a href="" class="btn btn-sm btn-secondary me-2 mb-2"><%= type.name %></a></li>
+          <% end %>
+        </ol>
+      </div>
+      <div class="p-4">
+        <h4 class="fst-italic">Archives</h4>
+        <ol class="list-unstyled mb-0">
+          <% 6.times do |i| %>
+            <li><a href="<%= (Date.today - i.month).strftime("%b %Y") %>"><%= (Date.today - i.month).strftime("%d %b %Y") %></a></li>
+          <% end %>
+        </ol>
+      </div>
+      <div class="p-4">
+        <h4 class="fst-italic">Elsewhere</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<%# End of event list %>

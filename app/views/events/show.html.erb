@@ -23,6 +23,7 @@
       <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= @event.duration %> hrs</p>
     </div>
     <h2 class="my-3"><%= @event.title %></h2>
+    <p class="lead my-2"><%= @event.description %></p>
     <div class="mb-1 text-muted">
       <span class="badge bg-success text-white"><%= @event.status.capitalize %></span>
       <% if @event.visibility == 'event_public' %>
@@ -33,8 +34,8 @@
         <span class="badge bg-primary text-white"><i class="fa-solid fa-users me-2"></i>Presenter</span>
       <% end %>
     </div>
+    <div class="mb-1 fw-bold my-2"><i class="fa-solid fa-location-dot me-2"></i><%= @event.location %></div>
     <%= image_tag url_for(@event.cover_picture), class: 'img-fluid w-100 my-3'%>
-    <div class="mb-1 fw-bold"><i class="fa-solid fa-location-dot me-2"></i><%= @event.location %></div>
-    <p class="lead my-2"><%= @event.description %></p>
+    <div class="my-2 lead"><%= @event.content %></div>
   </div>
 </div>

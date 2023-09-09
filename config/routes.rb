@@ -17,4 +17,5 @@ Rails.application.routes.draw do
 
   # Routes for users & presenters
   get '/events', to: 'pages#event', as: :user_home
+  get '/events/:id', to: 'pages#show', as: :user_event
 end

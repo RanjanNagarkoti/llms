@@ -34,7 +34,7 @@
             <div class="mb-1 text-muted"><i class="fa-solid fa-calendar-days me-2"></i><%= upcoming.date.strftime("%B %d, %Y") %></div>
             <div class="mb-1 text-muted"><i class="fa-solid fa-clock fa-beat me-2"></i><%= upcoming.time.strftime("%H:%M") %></div>
             <p class="card-text mb-auto"><%= truncate(upcoming.description, length: 80) %> </p>
-            <a href="#" class="stretched-link">Continue reading</a>
+            <%= link_to "Continue reading", user_event_path(upcoming), class:"stretched-link"%>
           </div>
           <div class="col-auto d-none d-lg-block">
             <%= image_tag (url_for(upcoming.cover_picture)),

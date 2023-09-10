@@ -1,5 +1,15 @@
 <div class="container">
-  <div class="d-flex justify-content-between align-items-center rounded bg-white p-3">
+  <%# Header %>
+  <div
+    class="
+      d-flex
+      justify-content-between
+      align-items-center
+      rounded
+      bg-white
+      p-3
+    "
+  >
     <h2 class="bajra-text-primary">Event Details</h2>
     <div class="d-flex">
       <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2" do %>
@@ -12,28 +22,53 @@
       <% end %>
     </div>
   </div>
-  <div class="bg-white  my-3 p-3">
-    <div class="w-75 m-auto">
-      <div class="my-1 text-muted d-flex mb-3">
-        <p><i class="fa-solid fa-calendar-days me-2"></i><%= @event.date.strftime("%B %d, %Y") %></p>
-        <p class="ms-3"><i class="fa-solid fa-clock fa-beat me-2"></i><%= @event.time %></p>
-        <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= @event.duration %> hrs</p>
+
+  <%# Event Details %>
+  <div class="bg-white">
+    <section class="my-3 p-3">
+      <div class="w-75 m-auto">
+        <div class="my-1 text-muted d-flex mb-3">
+          <p><i class="fa-solid fa-calendar-days me-2"></i><%= @event.date.strftime("%B %d, %Y") %></p>
+          <p class="ms-3"><i class="fa-solid fa-clock fa-beat me-2"></i><%= @event.time %></p>
+          <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= @event.duration %>
+            hrs</p>
+        </div>
+        <h2 class="my-3"><%= @event.title %></h2>
+        <p class="lead my-2"><%= @event.description %></p>
+        <div class="mb-1 text-muted">
+          <span class="badge bg-success text-white"><%= @event.status.capitalize %></span>
+          <% if @event.visibility == 'event_public' %>
+            <span class="badge bg-primary text-white"><i class="fa-solid fa-lock-open me-2"></i>Public</span>
+          <% elsif @event.visibility == 'event_private' %>
+            <span class="badge bg-primary text-white"><i class="fa-solid fa-lock me-2"></i>Private</span>
+          <% elsif @event.visibility == 'event_presenter' %>
+            <span class="badge bg-primary text-white"><i class="fa-solid fa-users me-2"></i>Presenter</span>
+          <% end %>
+        </div>
+        <div class="mb-1 fw-bold my-2"><i class="fa-solid fa-location-dot me-2"></i><%= @event.location %></div>
+        <%= image_tag url_for(@event.cover_picture), class: "img-fluid w-100 my-3" %>
+        <div class="my-2 lead"><%= @event.content %></div>
       </div>
-      <h2 class="my-3"><%= @event.title %></h2>
-      <p class="lead my-2"><%= @event.description %></p>
-      <div class="mb-1 text-muted">
-        <span class="badge bg-success text-white"><%= @event.status.capitalize %></span>
-        <% if @event.visibility == 'event_public' %>
-          <span class="badge bg-primary text-white"><i class="fa-solid fa-lock-open me-2"></i>Public</span>
-        <% elsif @event.visibility == 'event_private' %>
-          <span class="badge bg-primary text-white"><i class="fa-solid fa-lock me-2"></i>Private</span>
-        <% elsif @event.visibility == 'event_presenter' %>
-          <span class="badge bg-primary text-white"><i class="fa-solid fa-users me-2"></i>Presenter</span>
-        <% end %>
+    </section>
+
+    <%# Comments section %>
+    <section class="mt-5 mb-5 w-75 m-auto">
+    <h2>Comments</h2>
+    <hr>
+      <div class="d-flex justify-content-center row">
+        <div class="d-flex flex-column col-md-12">
+          <div class="coment-bottom bg-white p-2 px-4">
+            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+              <%= image_tag (url_for(current_user.avatar)),
+              style: "width: 38px; height: 38px; object-fit: cover;",
+              class: "img-fluid img-responsive rounded-circle me-2" %>
+              <input type="text" class="form-control mr-3" placeholder="Add comment">
+              <button class="btn btn-primary" type="button">Comment</button>
+            </div>
+            <%= render @comments %>
+          </div>
+        </div>
       </div>
-      <div class="mb-1 fw-bold my-2"><i class="fa-solid fa-location-dot me-2"></i><%= @event.location %></div>
-      <%= image_tag url_for(@event.cover_picture), class: 'img-fluid w-100 my-3'%>
-      <div class="my-2 lead"><%= @event.content %></div>
-    </div>
+    </section>
   </div>
 </div>

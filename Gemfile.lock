@@ -73,6 +73,13 @@ GEM
       execjs (~> 2)
     base64 (0.1.1)
     bcrypt (3.1.19)
+    better_html (2.0.2)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
+      ast (~> 2.0)
+      erubi (~> 1.4)
+      parser (>= 2.4)
+      smart_properties
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -109,6 +116,13 @@ GEM
       railties (>= 3.2)
     erb-formatter (0.4.3)
       syntax_tree (~> 6.0)
+    erb_lint (0.5.0)
+      activesupport
+      better_html (>= 2.0.1)
+      parser (>= 2.7.1.4)
+      rainbow
+      rubocop
+      smart_properties
     erubi (1.12.0)
     execjs (2.8.1)
     factory_bot (6.2.1)
@@ -121,7 +135,6 @@ GEM
     ffi (1.15.5)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    htmlbeautifier (1.4.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -279,6 +292,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    smart_properties (1.17.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -331,10 +345,10 @@ DEPENDENCIES
   devise (~> 4.9, >= 4.9.2)
   dotenv-rails (~> 2.8, >= 2.8.1)
   erb-formatter (~> 0.4.3)
+  erb_lint (~> 0.5.0)
   factory_bot (~> 6.2, >= 6.2.1)
   factory_bot_rails (~> 6.2)
   faker (~> 3.2, >= 3.2.1)
-  htmlbeautifier (~> 1.4, >= 1.4.2)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

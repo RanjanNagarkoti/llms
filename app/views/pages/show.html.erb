@@ -29,7 +29,7 @@
       <div class="w-75 m-auto">
         <div class="my-1 text-muted d-flex mb-3">
           <p><i class="fa-solid fa-calendar-days me-2"></i><%= @event.date.strftime("%B %d, %Y") %></p>
-          <p class="ms-3"><i class="fa-solid fa-clock fa-beat me-2"></i><%= @event.time %></p>
+          <p class="ms-3"><i class="fa-solid fa-clock fa-beat me-2"></i><%= @event.time.strftime("%H:%M") %></p>
           <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= @event.duration %>
             hrs</p>
         </div>
@@ -53,19 +53,23 @@
 
     <%# Comments section %>
     <section class="mt-5 mb-5 w-75 m-auto">
-    <h2>Comments</h2>
-    <hr>
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Comments</h2>
+        <%= link_to "Comment",
+        new_comment_path(@event),
+        data: {
+          turbo_frame: dom_id(Comment.new)
+        } %>
+      </div>
+      <hr>
+      <%= turbo_frame_tag Comment.new %>
       <div class="d-flex justify-content-center row">
         <div class="d-flex flex-column col-md-12">
           <div class="coment-bottom bg-white p-2 px-4">
-            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
-              <%= image_tag (url_for(current_user.avatar)),
-              style: "width: 38px; height: 38px; object-fit: cover;",
-              class: "img-fluid img-responsive rounded-circle me-2" %>
-              <input type="text" class="form-control mr-3" placeholder="Add comment">
-              <button class="btn btn-primary" type="button">Comment</button>
-            </div>
-            <%= render @comments %>
+            <% render template: "comments/new" %>
+            <%= turbo_frame_tag "comments" do %>
+              <%= render @comments %>
+            <% end %>
           </div>
         </div>
       </div>

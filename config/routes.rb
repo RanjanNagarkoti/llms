@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   # Routes for users & presenters
   get '/events', to: 'pages#event', as: :user_home
   get '/events/:id', to: 'pages#show', as: :user_event
+
+  post '/events/:event_id/comments', to: 'comments#create', as: :comments
+  get '/events/:event_id/comments/new', to: 'comments#new', as: :new_comment
 end

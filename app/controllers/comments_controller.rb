@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_event, only: %i[create new]
+  before_action :set_event, only: %i[create new destroy]
+  before_action :set_comment, only: %i[destroy]
 
   def new
     @comment = @event.comments.new
@@ -18,6 +19,15 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_event_path(@event), notice: 'Record deleted successfully.' }
+      format.turbo_stream
+    end
+  end
+
   private
 
   def comment_params
@@ -26,5 +36,9 @@ class CommentsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:event_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 end

@@ -1,84 +1,87 @@
-<div class="commented-section mt-2 border p-3 rounded">
-  <div
-    class="
-      d-flex
-      flex-row
-      align-items-center
-      justify-content-between
-      commented-user
-    "
-  >
-    <div class="commenter-details d-flex align-items-end">
-      <%= image_tag (url_for(current_user.avatar)),
-      style: "width: 38px; height: 38px; object-fit: cover;",
-      class: "img-fluid img-responsive rounded-circle me-2" %>
-      <h5 class="text-primary fw-bold ms-2">
-        <%= comment.user.username %></h5>
-    </div>
-    <span class="mb-1"><%= time_ago_in_words(comment.created_at) %>
-      ago</span></div>
-  <div class="comment-text-sm p-3"><span><%= comment.content %></span></div>
+<%= turbo_frame_tag "comment_#{comment.id}" do %>
+  <div class="commented-section mt-2 border p-3 rounded">
+    <div
+      class="
+        d-flex
+        flex-row
+        align-items-center
+        justify-content-between
+        commented-user
+      "
+    >
+      <div class="commenter-details d-flex align-items-end">
+        <%= image_tag (url_for(current_user.avatar)),
+        style: "width: 38px; height: 38px; object-fit: cover;",
+        class: "img-fluid img-responsive rounded-circle me-2" %>
+        <h5 class="text-primary fw-bold ms-2">
+          <%= comment.user.username %></h5>
+      </div>
+      <span class="mb-1"><%= time_ago_in_words(comment.created_at) %>
+        ago</span></div>
+    <div class="comment-text-sm p-3"><span><%= comment.content %></span></div>
 
-  <%# Comment Replies %>
-  <div class="reply-section">
-    <div class="d-flex flex-row align-items-center voting-icons">
-      <div class="" id="accordionPanelsStayOpenExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-            <button class="btn btn-sm btn-default"><i class="fa-solid fa-reply bi me-2"></i>Reply</button>
-            <button
-              class="btn btn-sm bt-primary"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-<%= comment.id %>"
-              aria-expanded="true"
-              aria-controls="panelsStayOpen-collapseOne"
+    <div class="reply-section">
+      <div class="d-flex flex-row align-items-center voting-icons">
+        <div class="" id="accordionPanelsStayOpenExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+              <button class="btn btn-sm btn-default"><i class="fa-solid fa-reply bi me-2"></i>Reply</button>
+              <button
+                class="btn btn-sm bt-primary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-<%= comment.id %>"
+                aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseOne"
+              >
+                <i class="fa-solid fa-comments bi me-2"></i>
+                Replies
+                <%= comment.replies.count %>
+              </button>
+
+              <%= link_to comment_path(comment.event_id, comment.id), class: "btn btn-sm btn-default", data: { "turbo-method": :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="fa-solid fa-trash bi me-2"></i>Remove
+              <% end %>
+            </h2>
+            <div
+              id="panelsStayOpen-<%= comment.id %>"
+              class="accordion-collapse collapse"
+              aria-labelledby="panelsStayOpen-headingOne"
             >
-              <i class="fa-solid fa-comments bi me-2"></i>
-              Replies
-              <%= comment.replies.count %>
-            </button>
-
-            <button class="btn btn-sm btn-default"><i class="fa-solid fa-trash bi me-2"></i>Remove</button>
-          </h2>
-          <div
-            id="panelsStayOpen-<%= comment.id %>"
-            class="accordion-collapse collapse"
-            aria-labelledby="panelsStayOpen-headingOne"
-          >
-            <div class="accordion-body mb-2 ms-5">
-              <% comment.replies.each do |reply| %>
-                <div class="card my-2 reply-width">
-                  <div class="card-body">
-                    <div class="d-flex flex-start">
-                      <%= image_tag (url_for(reply.user.avatar)),
-                      style: "width: 40px; height: 40px; object-fit: cover;",
-                      class: "rounded-circle shadow-1-strong me-3" %>
-                      <div class="w-100">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                          <h6 class="text-primary fw-bold mb-0">
-                            <%= reply.user.username %>
-                            <span class="text-dark ms-2"><%= reply.content %></span>
-                          </h6>
-                          <p class="mb-0"><%= time_ago_in_words(reply.created_at) %>
-                            ago</p>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <p class="small mb-0" style="color: #aaa;">
-                            <% if current_user.id == reply.user_id %>
-                              <a href="#!" class="link-grey">Remove</a>
-                            <% end %>
-                          </p>
+              <div class="accordion-body mb-2 ms-5">
+                <% comment.replies.each do |reply| %>
+                  <div class="card my-2 reply-width">
+                    <div class="card-body">
+                      <div class="d-flex flex-start">
+                        <%= image_tag (url_for(reply.user.avatar)),
+                        style: "width: 40px; height: 40px; object-fit: cover;",
+                        class: "rounded-circle shadow-1-strong me-3" %>
+                        <div class="w-100">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-primary fw-bold mb-0">
+                              <%= reply.user.username %>
+                              <span class="text-dark ms-2"><%= reply.content %></span>
+                            </h6>
+                            <p class="mb-0"><%= time_ago_in_words(reply.created_at) %>
+                              ago</p>
+                          </div>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <p class="small mb-0" style="color: #aaa;">
+                              <% if current_user.id == reply.user_id %>
+                                <a href="#!" class="link-grey">Remove</a>
+                              <% end %>
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>

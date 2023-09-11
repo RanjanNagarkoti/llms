@@ -25,12 +25,7 @@ class PagesController < ApplicationController
 
   def show
     @event = Event.find_by(id: params[:id], visibility: 'event_public')
-
-    # Comments
     @comment = Comment.new
     @comments = @event.comments.where(parent_id: nil)
-
-    # Materials
-    @material = Material.new
   end
 end

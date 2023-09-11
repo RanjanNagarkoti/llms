@@ -4,7 +4,6 @@ class Event < ApplicationRecord
   has_one_attached :cover_picture
   has_rich_text :content
   has_many :comments
-  has_many :materials
 
   enum status: %i[upcoming finished cancled
                   hold]

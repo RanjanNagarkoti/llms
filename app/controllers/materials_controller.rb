@@ -10,10 +10,6 @@ class MaterialsController < ApplicationController
   def create
     @material = @event.materials.build(material_params)
 
-    puts '***********************'
-    puts @material.inspect
-    puts '***********************'
-
     if @material.save
       respond_to do |format|
         format.html { redirect_to user_event_path(@event), notice: 'Record successfully created.' }

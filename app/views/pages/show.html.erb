@@ -13,7 +13,7 @@
     <h2 class="bajra-text-primary">Event Details</h2>
     <div class="d-flex">
       <% if current_user.presenter? %>
-        <%= link_to new_event_material_path(@event.id), class: "btn btn-sm btn-secondary me-2", data: {turbo_frame: dom_id(Material.new)} do %>
+        <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2" do %>
           <i class="fa-solid fa-upload"></i>
           Upload
         <% end %>
@@ -28,7 +28,6 @@
       <% end %>
     </div>
   </div>
-  <%= turbo_frame_tag Material.new %>
   <%# Event Details %>
   <div class="bg-white">
     <section class="my-3 p-3">

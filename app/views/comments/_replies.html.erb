@@ -1,28 +1,32 @@
 <% reply.each do |reply| %>
-  <div class="card my-2 reply-width">
-    <div class="card-body">
-      <div class="d-flex flex-start">
-        <%= image_tag (url_for(reply.user.avatar)),
-        style: "width: 40px; height: 40px; object-fit: cover;",
-        class: "rounded-circle shadow-1-strong me-3" %>
-        <div class="w-100">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="text-primary fw-bold mb-0">
-              <%= reply.user.username %>
-              <span class="text-dark ms-2"><%= reply.content %></span>
-            </h6>
-            <p class="mb-0"><%= time_ago_in_words(reply.created_at) %>
-              ago</p>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="small mb-0" style="color: #aaa;">
-              <% if current_user.id == reply.user_id %>
-                <a href="#!" class="link-grey">Remove</a>
-              <% end %>
-            </p>
+  <turbo-frame id="comment_<%= reply.id %>_<%= reply.parent_id %>">
+    <div class="card my-2 reply-width">
+      <div class="card-body">
+        <div class="d-flex flex-start">
+          <%= image_tag (url_for(reply.user.avatar)),
+          style: "width: 40px; height: 40px; object-fit: cover;",
+          class: "rounded-circle shadow-1-strong me-3" %>
+          <div class="w-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="text-primary fw-bold mb-0">
+                <%= reply.user.username %>
+                <span class="text-dark ms-2"><%= reply.content %></span>
+              </h6>
+              <p class="mb-0"><%= time_ago_in_words(reply.created_at) %>
+                ago</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="small mb-0" style="color: #aaa;">
+                <% if current_user.id == reply.user_id %>
+                  <%= link_to comment_path(reply.event_id, reply.id), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?"} do %>
+                    Remove
+                  <% end %>
+                <% end %>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </turbo-frame>
 <% end %>

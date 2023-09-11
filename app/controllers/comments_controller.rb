@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_event, only: %i[create new destroy]
-  before_action :set_comment, only: %i[destroy]
+  before_action :set_event, only: %i[create new destroy edit update]
+  before_action :set_comment, only: %i[destroy edit update]
 
   def new
     @comment = @event.comments.new
@@ -16,6 +16,19 @@ class CommentsController < ApplicationController
       end
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit; end
+
+  def update
+    respond_to do |format|
+      if @comment.update(comment_params)
+        redirect_to user_event_path(@event), notice: 'Record updated successfully.'
+        format.turbo_stream
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 

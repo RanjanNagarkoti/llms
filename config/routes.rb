@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   post '/events/:event_id/comments', to: 'comments#create', as: :comments
   get '/events/:event_id/comments/new', to: 'comments#new', as: :new_comment
   delete '/events/:event_id/comments/:id', to: 'comments#destroy', as: :comment
+  get '/events/:event_id/comments/:id/edit', to: 'comments#edit', as: :edit_comment
+  patch '/events/:event_id/comments/:id', to: 'comments#update', as: :update_comment
+
 end

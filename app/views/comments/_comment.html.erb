@@ -42,6 +42,11 @@
               <%= link_to comment_path(comment.event_id, comment.id), class: "btn btn-sm btn-default", data: { "turbo-method": :delete, turbo_confirm: "Are you sure?"} do %>
                 <i class="fa-solid fa-trash bi me-2"></i>Remove
               <% end %>
+
+              <%= link_to edit_comment_path(comment.event_id, comment.id), class: "btn btn-sm btn-default" do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+                Edit
+              <% end %>
             </h2>
             <div
               id="panelsStayOpen-<%= comment.id %>"

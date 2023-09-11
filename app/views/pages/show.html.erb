@@ -12,8 +12,14 @@
   >
     <h2 class="bajra-text-primary">Event Details</h2>
     <div class="d-flex">
+      <% if current_user.presenter? %>
+        <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2" do %>
+          <i class="fa-solid fa-upload"></i>
+          Upload
+        <% end %>
+      <% end %>
       <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2" do %>
-        <i class="fa-solid fa-pen me-2"></i>
+        <i class="fa-solid fa-plus me-2"></i>
         Attend
       <% end %>
       <%= link_to events_path, class: "btn btn-sm btn-primary me-2" do %>
@@ -22,7 +28,6 @@
       <% end %>
     </div>
   </div>
-
   <%# Event Details %>
   <div class="bg-white">
     <section class="my-3 p-3">
@@ -50,7 +55,6 @@
         <div class="my-2 lead"><%= @event.content %></div>
       </div>
     </section>
-
     <%# Comments section %>
     <section class="mt-5 mb-5 w-75 m-auto">
       <div class="d-flex justify-content-between align-items-center">

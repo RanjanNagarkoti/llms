@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy edit_material update_material]
+  before_action :set_event, only: %i[show edit update destroy edit_material update_material destroy_material]
   before_action :is_presenter, only: %i[edit_material update_material]
 
   def index
@@ -50,6 +50,20 @@ class EventsController < ApplicationController
         format.turbo_stream
       else
         render :edit_material, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def destroy_material
+    return unless current_user.admin? || current_user.presenter?
+
+    @material = @event.materials.find_by(id: params[:material_id])
+    @material.purge
+
+    respond_to do |format|
+      # redirect_to user_event_path(@event), notice: 'Record deleted successfully.'
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove("event_material_#{@material.id}")
       end
     end
   end

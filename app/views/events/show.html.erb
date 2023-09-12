@@ -39,31 +39,32 @@
     <div class="my-2 lead"><%= @event.content %></div>
     <%# Materials list %>
     <div class="my-3">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Shared Files</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
+      <%= turbo_frame_tag "event_materials" do %>
+        <ul class="list-group">
           <% @event.materials.each do |material| %>
-            <tr>
-              <td><%= material.filename %></td>
-              <td class="col-4">
-                <%= link_to rails_blob_path(material, disposition: 'attachment'), class: 'btn btn-sm btn-primary' do %>
-                  <i class="fa-solid fa-download bi me-2"></i>
-                  Download
-                <% end %>
-                <%= link_to rails_blob_path(material, disposition: 'preview'), class: 'ms-2 btn btn-sm btn-primary' do %>
-                  <i class="fa-solid fa-expand bi me-2"></i>
-                  View
-                <% end %>
-              </td>
-            </tr>
+            <%= turbo_frame_tag "event_material_#{material.id}" do %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= material.filename %>
+                <div class="col-4 button-list">
+                  <%= link_to rails_blob_path(material, disposition: 'attachment'), class: 'btn btn-sm btn-primary mb-1' do %>
+                    <i class="fa-solid fa-download bi me-2"></i>
+                    Download
+                  <% end %>
+                  <%= link_to rails_blob_path(material, disposition: 'preview'), class: 'ms-2 btn btn-sm btn-primary mb-1' do %>
+                    <i class="fa-solid fa-expand bi me-2"></i>
+                    View
+                  <% end %>
+                  <%# Delte material %>
+                  <% if current_user.admin? || current_user.presenter? %>
+                    <%= link_to delete_material_path(@event.id, material.id), class: "btn btn-sm btn-default bajra-text-primary me-2", data: { "turbo-method": :delete, confirm: 'Are you sure?' } do %>
+                      <i class="fa-solid fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
           <% end %>
-        </tbody>
-      </table>
+        </ul>
+      <% end %>
     </div>
   </div>
-</div>

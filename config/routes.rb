@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -30,6 +31,6 @@ Rails.application.routes.draw do
   delete '/events/:id/material/:material_id', to: 'events#destroy_material', as: :delete_material
 
   resources :events, only: %i[index] do
-    resources :participants, only: %i[create destroy]
+    resources :participants, only: %i[new create destroy]
   end
 end

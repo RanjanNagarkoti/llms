@@ -74,6 +74,16 @@
         <div class="form-group my-2 mb-3">
           <%= form.label :materials, class: 'form-label'%>
           <%= form.file_field :materials, :class => "form-control", multiple: true%>
+          <% if @event.materials.attached? %>
+            <% @event.materials.each do |material|%>
+              <%= form.hidden_field :materials, multiple: true, value: material.signed_id %>
+            <% end %>
+            <div>
+              <% @event.materials.each do |material| %>
+                <p class="mt-2"> <%= material.filename %> </p>
+              <% end %>
+            </div>
+          <% end %>
           <% @event.errors.full_messages_for(:materials).each do |message| %>
             <div class="text-danger"><%= message %></div>
           <% end %>

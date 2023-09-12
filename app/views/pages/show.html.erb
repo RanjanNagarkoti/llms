@@ -18,9 +18,19 @@
           Upload
         <% end %>
       <% end %>
-      <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2" do %>
-        <i class="fa-solid fa-plus me-2"></i>
-        Attend
+      <% if current_user.user? %>
+        <% if @event.attendees.exists?(current_user.id) %>
+          <%= link_to event_participant_path(@event.id, Participant.find_by(event_id: @event.id, user_id: current_user.id).id), class: "btn btn-sm btn-primary me-2", data: { "turbo-method": :delete, confirm: 'Are you sure?' } do %>
+            Leave Event
+          <% end %>
+        <% else %>
+          <%= form_with(model: @event, url: event_participants_path(@event), method: :post, class: "d-inline") do |form| %>
+            <%= form.button type: :submit, class: "btn btn-sm btn-secondary me-2" do %>
+              <i class="fa-solid fa-plus me-2"></i>
+              Attend
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
       <%= link_to events_path, class: "btn btn-sm btn-primary me-2" do %>
         <i class="fa-solid fa-arrow-left me-2"></i>

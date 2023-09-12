@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   get '/events/:event_id/comments/:id/edit', to: 'comments#edit', as: :edit_comment
   patch '/events/:event_id/comments/:id', to: 'comments#update', as: :update_comment
 
+  get '/events/:id/edit', to: 'events#edit_material'
+  patch '/events/:id', to: 'events#update_material'
 end

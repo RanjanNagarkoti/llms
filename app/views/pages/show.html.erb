@@ -12,8 +12,14 @@
   >
     <h2 class="bajra-text-primary">Event Details</h2>
     <div class="d-flex">
+      <% if current_user.presenter? %>
+        <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2", data: {turbo_frame: "material_#{@event.id}"} do %>
+          <i class="fa-solid fa-upload bi me-2"></i>
+          Upload
+        <% end %>
+      <% end %>
       <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2" do %>
-        <i class="fa-solid fa-pen me-2"></i>
+        <i class="fa-solid fa-plus me-2"></i>
         Attend
       <% end %>
       <%= link_to events_path, class: "btn btn-sm btn-primary me-2" do %>
@@ -22,7 +28,7 @@
       <% end %>
     </div>
   </div>
-
+  <%= turbo_frame_tag "material_#{@event.id}" %>
   <%# Event Details %>
   <div class="bg-white">
     <section class="my-3 p-3">
@@ -50,7 +56,38 @@
         <div class="my-2 lead"><%= @event.content %></div>
       </div>
     </section>
-
+    <%# Event Materials table %>
+    <section class="material-table">
+      <% if @event.materials.attached? %>
+        <div class="my-3 w-75 m-auto">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Shared Files</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @event.materials.each do |material| %>
+                <tr>
+                  <td><%= material.filename %></td>
+                  <td class="col-4">
+                    <%= link_to rails_blob_path(material, disposition: 'attachment'), class: 'btn btn-sm btn-primary mb-1' do %>
+                      <i class="fa-solid fa-download bi me-2"></i>
+                      Download
+                    <% end %>
+                    <%= link_to rails_blob_path(material, disposition: 'preview'), class: 'ms-2 btn btn-sm btn-primary mb-1' do %>
+                      <i class="fa-solid fa-expand bi me-2"></i>
+                      View
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </section>
     <%# Comments section %>
     <section class="mt-5 mb-5 w-75 m-auto">
       <div class="d-flex justify-content-between align-items-center">

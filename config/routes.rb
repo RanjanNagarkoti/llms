@@ -28,4 +28,8 @@ Rails.application.routes.draw do
   get '/events/:id/edit', to: 'events#edit_material'
   patch '/events/:id', to: 'events#update_material'
   delete '/events/:id/material/:material_id', to: 'events#destroy_material', as: :delete_material
+
+  resources :events, only: %i[index] do
+    resources :participants, only: %i[create destroy]
+  end
 end

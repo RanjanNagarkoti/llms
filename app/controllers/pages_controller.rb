@@ -27,6 +27,7 @@ class PagesController < ApplicationController
     @event = Event.find_by(id: params[:id], visibility: 'event_public')
     @comment = Comment.new
     @comments = @event.comments.where(parent_id: nil)
+    @presenter = @event.participants.where(user_id: current_user.id, presenter: true).first
     @attendees = @event.attendees
   end
 end

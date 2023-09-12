@@ -12,13 +12,13 @@
   >
     <h2 class="bajra-text-primary">Event Details</h2>
     <div class="d-flex">
-      <% if current_user.presenter? %>
+      <% if @presenter !=nil  %>
         <%= link_to edit_event_path(@event), class: "btn btn-sm btn-secondary me-2", data: {turbo_frame: "material_#{@event.id}"} do %>
           <i class="fa-solid fa-upload bi me-2"></i>
           Upload
         <% end %>
       <% end %>
-      <% if current_user.user? %>
+      <% if @presenter == nil %>
         <% if @event.attendees.exists?(current_user.id) %>
           <%= link_to event_participant_path(@event.id, Participant.find_by(event_id: @event.id, user_id: current_user.id).id), class: "btn btn-sm btn-primary me-2", data: { "turbo-method": :delete, confirm: 'Are you sure?' } do %>
             Leave Event
@@ -85,7 +85,7 @@
                       View
                     <% end %>
                     <%# Delte material %>
-                    <% if current_user.admin? || current_user.presenter? %>
+                    <% if current_user.admin? || @presenter != nil %>
                       <%= link_to delete_material_path(@event.id, material.id), class: "btn btn-sm btn-default bajra-text-primary me-2", data: { "turbo-method": :delete, confirm: 'Are you sure?' } do %>
                         <i class="fa-solid fa-trash"></i>
                       <% end %>
@@ -121,27 +121,30 @@
         </div>
       </section>
     </div>
-    <% if current_user.presenter? && @attendees.count > 0 %>
-      <div class="w-25 m-3">
-        <div class="accordion" id="accordionExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Participants (<%= @event.attendees.count %>)
-              </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <ul class="list-group list-group-flush">
-                  <%= turbo_frame_tag "participants" do %>
-                    <%= render partial: 'pages/shared/participant', local: {attendees: @attendees} %>
-                  <% end %>
-                </ul>
+    <%# Attendees list %>
+    <% if @presenter != nil %>
+      <% if current_user.presenter? && @attendees.count > 0 %>
+        <div class="w-25 m-3">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Participants (<%= @event.attendees.count %>)
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <ul class="list-group list-group-flush">
+                    <%= turbo_frame_tag "participants" do %>
+                      <%= render partial: 'pages/shared/participant', local: {attendees: @attendees} %>
+                    <% end %>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

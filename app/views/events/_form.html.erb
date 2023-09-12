@@ -1,8 +1,8 @@
 <div class="bg-white p-3">
   <%= form_with model: @event do |form| %>
     <div class="form-group my-2">
-      <%= form.label :title, class: 'form-label'%>
-      <%= form.text_field :title, :class => "form-control"%>
+      <%= form.label :title, class: 'form-label' %>
+      <%= form.text_field :title, :class => "form-control" %>
       <% @event.errors.full_messages_for(:title).each do |message| %>
         <div class="text-danger"><%= message %></div>
       <% end %>
@@ -10,72 +10,76 @@
     <div class="mt-5 d-flex flex-sm-column flex-lg-row flex-md-column">
       <div class="w-75 me-5">
         <div class="form-group mb-3">
-          <%= form.rich_text_area :content, class: 'form-control customized-min-height'%>
+          <%= form.rich_text_area :content, class: 'form-control customized-min-height' %>
         </div>
         <div class="form-group my-3 d-flex align-items-center">
           <div class="form-group my-2 mb-3 col-4">
-            <%= form.label :status, class: 'form-label'%>
+            <%= form.label :status, class: 'form-label' %>
             <%= form.collection_select :status, Event.statuses.keys, :to_s, :humanize, {}, { class: 'form-select' } %>
           </div>
           <div class="form-group my-2 mb-3 col-4 ms-2">
-            <%= form.label :visibility, class: 'form-label'%>
+            <%= form.label :visibility, class: 'form-label' %>
             <%= form.collection_select :visibility, Event.visibilities.keys, :to_s, :humanize, {}, { class: 'form-select' } %>
           </div>
           <div class="form-group ms-3">
-            <%= form.submit class:"btn btn-sm btn-primary mt-4"%>
+            <%= form.submit class:"btn btn-sm btn-primary mt-4" %>
           </div>
         </div>
       </div>
       <div class=" w-25 event-left-box">
         <div class="form-group my-2 mb-3">
-          <%= form.label :description, class: 'form-label'%>
-          <%= form.text_area :description, :class => "form-control", style: "height: 10vh;"%>
+          <%= form.label :description, class: 'form-label' %>
+          <%= form.text_area :description, :class => "form-control", style: "height: 10vh;" %>
           <% @event.errors.full_messages_for(:description).each do |message| %>
             <div class="text-danger"><%= message %></div>
           <% end %>
         </div>
         <div class="form-group my-2 mb-3">
-          <%= form.label :duration, class: 'form-label'%>
-          <%= form.number_field :duration, :class => "form-control"%>
+          <%= form.label :duration, class: 'form-label' %>
+          <%= form.number_field :duration, :class => "form-control" %>
           <div class="text-danger"><%= @event.errors.full_messages_for(:duration)[0] %></div>
         </div>
         <div class="form-group my-2 mb-3">
-          <%= form.label :time, class: 'form-label'%>
-          <%= form.time_field :time, :class => "form-control w-100"%>
+          <%= form.label :time, class: 'form-label' %>
+          <%= form.time_field :time, :class => "form-control w-100" %>
           <% @event.errors.full_messages_for(:time).each do |message| %>
             <div class="text-danger"><%= message %></div>
           <% end %>
         </div>
         <div class="form-group my-2 mb-3">
-          <%= form.label :date, class: 'form-label'%>
-          <%= form.date_field :date, :class => "form-control"%>
+          <%= form.label :date, class: 'form-label' %>
+          <%= form.date_field :date, :class => "form-control" %>
           <% @event.errors.full_messages_for(:date).each do |message| %>
             <div class="text-danger"><%= message %></div>
           <% end %>
         </div>
         <div class="form-group my-2 mb-3">
-          <%= form.label :location, class: 'form-label'%>
-          <%= form.text_field :location, :class => "form-control"%>
+          <%= form.label :location, class: 'form-label' %>
+          <%= form.text_field :location, :class => "form-control" %>
           <% @event.errors.full_messages_for(:location).each do |message| %>
             <div class="text-danger"><%= message %></div>
           <% end %>
         </div>
         <div class="form-group my-2 mb-3">
-          <%= form.label "Targeted Audience", class: 'form-label'%>
+          <%= form.label "Presenter", class: 'form-label' %>
           <%= form.collection_select :type_id, Type.all, :id, :name, {}, { class: 'form-select' } %>
         </div>
         <div class="form-group my-2 mb-3">
-          <%= form.label :cover_picture, class: 'form-label'%>
-          <%= form.file_field :cover_picture, :class => "form-control"%>
+          <%= form.label "Targeted Audience", class: 'form-label' %>
+          <%= form.collection_select :type_id, Type.all, :id, :name, {}, { class: 'form-select' } %>
+        </div>
+        <div class="form-group my-2 mb-3">
+          <%= form.label :cover_picture, class: 'form-label' %>
+          <%= form.file_field :cover_picture, :class => "form-control" %>
           <% @event.errors.full_messages_for(:cover_picture).each do |message| %>
             <div class="text-danger"><%= message %></div>
           <% end %>
         </div>
         <div class="form-group my-2 mb-3">
-          <%= form.label :materials, class: 'form-label'%>
-          <%= form.file_field :materials, :class => "form-control", multiple: true%>
+          <%= form.label :materials, class: 'form-label' %>
+          <%= form.file_field :materials, :class => "form-control", multiple: true %>
           <% if @event.materials.attached? %>
-            <% @event.materials.each do |material|%>
+            <% @event.materials.each do |material| %>
               <%= form.hidden_field :materials, multiple: true, value: material.signed_id %>
             <% end %>
             <div>

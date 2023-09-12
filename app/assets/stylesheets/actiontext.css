@@ -37,6 +37,10 @@
 
 trix-editor {
   &.customized-min-height {
-    min-height: 66vh;
+    height: 700px;
+    max-height: 700px;
   }
+}
+.event-left-box{
+  max-height: 700px;
 }

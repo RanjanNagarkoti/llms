@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy edit_material update_material destroy_material]
+  before_action :is_presenter, only: %i[edit_material update_material]
 
   def index
     @pagy, @events = pagy(Event.all.order(created_at: :desc))
@@ -38,6 +39,35 @@ class EventsController < ApplicationController
     redirect_to events_path, notice: 'Record deleted successfully.'
   end
 
+  def edit_material
+    render :edit_material
+  end
+
+  def update_material
+    respond_to do |format|
+      if @event.update(event_params)
+        redirect_to user_event_path(@event), notice: 'Record updated successfully.'
+        format.turbo_stream
+      else
+        render :edit_material, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def destroy_material
+    return unless current_user.admin? || current_user.presenter?
+
+    @material = @event.materials.find_by(id: params[:material_id])
+    @material.purge
+
+    respond_to do |format|
+      # redirect_to user_event_path(@event), notice: 'Record deleted successfully.'
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove("event_material_#{@material.id}")
+      end
+    end
+  end
+
   private
 
   def set_event
@@ -46,6 +76,10 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :date, :time, :duration, :status, :visibility, :location,
-                                  :type_id, :cover_picture, :content)
+                                  :type_id, :cover_picture, :content, materials: [])
+  end
+
+  def is_presenter
+    redirect_to root_path unless current_user.presenter?
   end
 end

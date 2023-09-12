@@ -37,5 +37,33 @@
     <div class="mb-1 fw-bold my-2"><i class="fa-solid fa-location-dot me-2"></i><%= @event.location %></div>
     <%= image_tag url_for(@event.cover_picture), class: 'img-fluid w-100 my-3'%>
     <div class="my-2 lead"><%= @event.content %></div>
+    <%# Materials list %>
+    <div class="my-3">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Shared Files</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @event.materials.each do |material| %>
+            <tr>
+              <td><%= material.filename %></td>
+              <td class="col-4">
+                <%= link_to rails_blob_path(material, disposition: 'attachment'), class: 'btn btn-sm btn-primary' do %>
+                  <i class="fa-solid fa-download bi me-2"></i>
+                  Download
+                <% end %>
+                <%= link_to rails_blob_path(material, disposition: 'preview'), class: 'ms-2 btn btn-sm btn-primary' do %>
+                  <i class="fa-solid fa-expand bi me-2"></i>
+                  View
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

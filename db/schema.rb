@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_09_164533) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_061432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_09_164533) do
     t.index ["type_id"], name: "index_events_on_type_id"
   end
 
+  create_table "materials", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_materials_on_event_id"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.boolean "presenter", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_participants_on_event_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
   create_table "types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -107,4 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_09_164533) do
   add_foreign_key "comments", "events"
   add_foreign_key "comments", "users"
   add_foreign_key "events", "types"
+  add_foreign_key "materials", "events"
+  add_foreign_key "participants", "events"
+  add_foreign_key "participants", "users"
 end

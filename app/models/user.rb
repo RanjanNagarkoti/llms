@@ -8,6 +8,8 @@ class User < ApplicationRecord
   # Associations
   has_one_attached :avatar
   has_many :comments
+  has_many :participants
+  has_many :events, through: :participants
 
   # Validations
   validates_associated :avatar

@@ -5,6 +5,8 @@ class Event < ApplicationRecord
   has_rich_text :content
   has_many :comments
   has_many_attached :materials
+  has_many :users, through: :participants
+  has_one :presenter, -> { where(presenter: true) }, class_name: 'Participant'
 
   enum status: %i[upcoming finished cancled
                   hold]

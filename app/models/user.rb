@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_create :send_welcome_email
+
   enum role: %i[user presenter admin]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -29,4 +31,10 @@ class User < ApplicationRecord
                                                          message: 'should include at least one number, one uppercase letter, and one special character' }
 
   validates :avatar, presence: { message: 'is required!' }
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome_message(email).deliver_now
+  end
 end

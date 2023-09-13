@@ -2,7 +2,7 @@ You've Been Assigned as the Presenter for an Upcoming Event
 
 Dear <%= @user.first_name.capitalize() %> <%= @user.last_name.capitalize() %>,
 
-We hope this message finds you well. We are excited to inform you that you have been selected as the presenter for an upcoming event: "<%= @event.title %>." Your expertise and knowledge will undoubtedly make this event a success!
+We hope this message finds you well. We are excited to inform you that you have been selected as the presenter for an upcoming event: "<%= @event.title %>," scheduled to take place on <%= @event.date.strftime('%B %d, %Y') %> at <%= @event.time.strftime('%I:%M %p') %>. Your expertise and knowledge will undoubtedly make this event a success!
 
 As the presenter, you play a crucial role in delivering an engaging and informative session. To ensure everything goes smoothly, please take a moment to upload any required materials or presentations for the event. This will help participants prepare and enhance their experience.
 

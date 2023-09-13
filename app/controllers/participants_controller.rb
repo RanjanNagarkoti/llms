@@ -12,6 +12,7 @@ class ParticipantsController < ApplicationController
       @participant = @event.participants.build(participant_params.merge(presenter: true))
 
       if @participant.save
+        EventMailer.notify_presenter(@participant, @event).deliver_later
         respond_to do |format|
           format.html { redirect_to event_path(@event), notice: 'Record successfully created.' }
           format.turbo_stream { flash.now[:notice] = 'Presenter successfully added.' }

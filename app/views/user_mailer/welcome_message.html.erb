@@ -1,5 +1,17 @@
-<h1>User#welcome_message</h1>
-
-<p>
-  <%= @greeting %>, find me in app/views/user_mailer/welcome_message.html.erb
-</p>
+<section class="w-75 m-auto bg-light text-center">
+  <div class="bg-white w-50 m-auto p-3">
+    <h1>
+      <%= image_tag 'logo/welcome.jpg', class: 'img-fluid my-3' %>
+    </h1>
+    <div class="mail-body text-muted">
+      <h3 class="my-3">Welcome to LLMS!</h3>
+      <p class="my-3 w-75 m-auto">Welcome to the Lunch and Learn Management System! We're excited to have you on board. With our platform, you can easily schedule, manage, and track your Lunch and Learn sessions.
+      </p>
+      <p class="my-3 w-75 m-auto">
+        Don't hesitate to get in touch if you have any questions; we'll always get back to you :)
+      </p>
+      <%= link_to "Home", "http://127.0.0.1:3000/events", class: 'btn btn-primary rounded-pill'%>
+    </div>
+  </div>
+  <p>
+  </section>

@@ -1,0 +1,18 @@
+You're Presenting in 30 Minutes!
+
+Dear <%= @presenter_detail.first_name.capitalize() %> <%= @presenter_detail.last_name.capitalize() %>,
+
+We wanted to remind you that your presentation for the event "<%= @event.title %>" is scheduled to begin in just 30 minutes. Please make sure you are prepared and ready to go.
+
+Event Details:
+- Event Name: <%= @event.title %>
+- Date: <%= @event.date.strftime('%B %d, %Y') %>
+- Time: <%= @event.time.strftime('%I:%M %p') %>
+- Location: <%= @event.location %>
+
+If you have any last-minute preparations or need assistance, please reach out to the event organizers immediately.
+
+We wish you the best of luck with your presentation!
+
+Warm regards,
+Your LLMS!

@@ -20,4 +20,12 @@ class EventMailer < ApplicationMailer
 
     mail to: @user.email, subject: 'Thank You for Participating!'
   end
+
+  def remind_presenter(event)
+    @event = event
+    @presenter = @event.participants.where(presenter: true).first
+    @presenter_detail = User.find(@presenter.user_id)
+
+    mail to: @presenter_detail.email, subject: 'You\'re Presenting in 30 Minutes!'
+  end
 end

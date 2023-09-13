@@ -1,6 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
+require 'sidekiq'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -16,8 +17,10 @@ module LunchAndLearnManagementSystem
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Asia/Kathmandu"
     # config.eager_load_paths << Rails.root.join("extras")
     config.autoload_paths << Rails.root.join('lib')
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

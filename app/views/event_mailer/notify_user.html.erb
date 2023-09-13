@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Thank You for Participating!</h1>
+  <div class="mb-3">
+    <p>Hello <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>,</p>
+    <p>We want to express our gratitude for your participation in the upcoming event: "<%= @event.title %>". Your presence and engagement will contribute to the success of this event.</p>
+    <p>As a reminder, please make sure to arrive on time for the event, as it is scheduled to begin promptly. Being punctual will help us ensure a smooth and enjoyable experience for all participants.</p>
+    <p><strong>Event Details:</strong></p>
+    <ul>
+      <li><strong>Event Name:</strong> <%= @event.title %></li>
+      <li><strong>Date:</strong> <%= @event.date.strftime('%B %d, %Y') %></li>
+      <li><strong>Time:</strong> <%= @event.time.strftime('%I:%M %p') %></li>
+      <li><strong>Location:</strong> <%= @event.location %></li>
+    </ul>
+    <p>If you have any questions or need further information, please don't hesitate to reach out to us.</p>
+    <p>We look forward to your participation and hope you have a wonderful time at the event!</p>
+  </div>
+  <div class="text-muted">
+    <p>Best regards,</p>
+    <p>The LLMS!</p>
+  </div>
+</div>

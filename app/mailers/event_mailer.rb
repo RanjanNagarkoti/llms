@@ -13,4 +13,11 @@ class EventMailer < ApplicationMailer
 
     mail to: @user.email, subject: 'You\'ve Been Assigned as the Presenter for an Upcoming Event'
   end
+
+  def notify_user(participant, event)
+    @user = User.find(participant.user_id)
+    @event = event
+
+    mail to: @user.email, subject: 'Thank You for Participating!'
+  end
 end

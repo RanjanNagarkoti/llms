@@ -22,6 +22,7 @@ class ParticipantsController < ApplicationController
       end
     else
       @participant = Participant.create(user_id: current_user.id, event_id: @event.id)
+      EventMailer.notify_user(@participant, @event).deliver_later
       return unless @participant.save
 
       redirect_to user_event_path(@event), notice: 'Record successfully created.'

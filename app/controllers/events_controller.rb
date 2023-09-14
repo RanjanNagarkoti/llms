@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @event.comments.where(parent_id: nil)
+    @attendees = @event.attendees
   end
 
   def new

@@ -1,0 +1,32 @@
+<div class="container">
+  <%= form_tag(event_filter_path, method: :get, class: 'd-flex p-3 bg-white border mb-3 rounded shadow-sm') do %>
+    <div class="form-group w-100">
+      <%= select_tag 'status', options_for_select(['upcoming', 'finished', 'canceled', 'hold']), class: 'form-control' %>
+    </div>
+    <div class="ms-2 form-group">
+      <%= submit_tag 'Filter', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+  <%= form_with model: @event do |form| %>
+  <% end %>
+  <%= render partial: 'pages/shared/user_event', locals: {events: @upcomings} %>
+  <nav aria-label="Page navigation example position-absolute bottom-0">
+    <ul class="pagination justify-content-center">
+      <li class="page-item <%= 'disabled' if @pagy.prev.nil? %>">
+        <%= if @pagy.prev
+            link_to "Previous", pagy_url_for(@pagy, @pagy.prev), class: "page-link"
+          end %>
+      </li>
+      <% @pagy.series.each do |item| %>
+        <li class="page-item <%= 'active' if item == @pagy.page %>">
+          <%= link_to item, pagy_url_for(@pagy, item), class: "page-link" %>
+        </li>
+      <% end %>
+      <li class="page-item <%= 'disabled' if @pagy.next.nil? %>">
+        <%= if @pagy.next
+            link_to "Next", pagy_url_for(@pagy, @pagy.next), class: "page-link"
+          end %>
+      </li>
+    </ul>
+  </nav>
+</div>

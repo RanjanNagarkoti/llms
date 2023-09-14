@@ -3,10 +3,10 @@ class Event < ApplicationRecord
   belongs_to :type
   has_one_attached :cover_picture
   has_rich_text :content
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many_attached :materials
-  has_many :participants
-  has_many :attendees, through: :participants, source: :user
+  has_many :participants, dependent: :destroy
+  has_many :attendees, through: :participants, source: :user, dependent: :destroy
 
   enum status: %i[upcoming finished cancled
                   hold]

@@ -3,5 +3,5 @@ class Type < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   # Associations
-  has_many :events
+  has_many :events, dependent: :destroy
 end

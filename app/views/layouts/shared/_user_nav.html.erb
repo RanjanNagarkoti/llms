@@ -32,18 +32,18 @@
                 >
                   <%= current_user.first_name.capitalize()[0] %><%= current_user.last_name.capitalize()[0] %></span>
               <% else %>
-                <image src="<%= (url_for(current_user.avatar))%>" class="rounded-pill" style="width: 30px; height: 30px; object-fit: cover;">
-                <% end %>
-                <%= button_to " Logout",
-              destroy_user_session_path,
-              class: "btn btn-danger ms-2",
-              method: :delete %>
-              </div>
-            <% else %>
-              <%= link_to "login", new_user_session_path %>
-            <% end %>
-          </ul>
-        </div>
+                <%= image_tag url_for(current_user.avatar), class: "rounded-pill", style: "width: 35px; height: 35px; object-fit: cover;" %>
+              <% end %>
+              <%= button_to destroy_user_session_path, class: "btn btn-default display-2", method: :delete do %>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              <% end %>
+            </div>
+          <% else %>
+            <%= link_to "login", new_user_session_path %>
+          <% end %>
+        </ul>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
+</header>

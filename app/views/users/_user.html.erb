@@ -6,17 +6,17 @@
   <td><%= user.email %></td>
   <td>
     <% if user.role == 'user' %>
-      <i class="fa-solid fa-user"></i>
+      <i class="fa-solid fa-user" title="User"></i>
     <% else %>
-      <i class="fa-solid fa-person-chalkboard"></i>
+      <i class="fa-solid fa-person-chalkboard" title="Presenter"></i>
     <% end %>
   </td>
   <td class="d-flex">
     <%= link_to user_path(user.id), class: "nav-link bajra-text-primary me-2", data: { "turbo-method": :delete } do %>
-      <i class="fa-solid fa-trash"></i>
+      <i class="fa-solid fa-trash" title="Delete"></i>
     <% end %>
     <%= link_to user_path(user.id), class: "nav-link link-dark ms-2" do %>
-      <i class="fa-solid fa-eye"></i>
+      <i class="fa-solid fa-eye" title="Edit"></i>
     <% end %>
   </td>
 </tr>

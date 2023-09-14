@@ -19,7 +19,6 @@
       <span class="mb-1"><%= time_ago_in_words(comment.created_at) %>
         ago</span></div>
     <div class="comment-text-sm p-3"><span><%= comment.content %></span></div>
-
     <div class="reply-section">
       <div class="d-flex flex-row align-items-center voting-icons">
         <div class="" id="accordionPanelsStayOpenExample">
@@ -39,11 +38,10 @@
                   Replies
                 </button>
               <% end %>
-              <% if current_user.id == comment.user_id %>
+              <% if current_user == comment.user %>
                 <%= link_to comment_path(comment.event_id, comment.id), class: "btn btn-sm btn-default", data: { "turbo-method": :delete, turbo_confirm: "Are you sure?"} do %>
                   <i class="fa-solid fa-trash bi me-2"></i>Remove
                 <% end %>
-
                 <%= link_to edit_comment_path(comment.event_id, comment.id), class: "btn btn-sm btn-default" do %>
                   <i class="fa-solid fa-pen-to-square"></i>
                   Edit

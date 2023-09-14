@@ -1,6 +1,7 @@
 <%= turbo_stream.prepend "comments",
                      partial: "comments/comment",
                      locals: {
-                       comment: @comment
+                       comment: @comment,
+                       current_user: @current_user
                      } %>
 <%= turbo_stream.update Comment.new, "" %>

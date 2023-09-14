@@ -9,4 +9,6 @@ class Comment < ApplicationRecord
   validates :user, presence: true
   validates :content, presence: true, length: { minimum: 1 }
   validates :event, presence: true
+
+  broadcasts_to ->(comment) { [comment.event, 'comments'] }, inserts_by: :prepend
 end

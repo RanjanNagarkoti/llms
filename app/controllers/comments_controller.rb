@@ -8,9 +8,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @event.comments.build(comment_params.merge(user_id: current_user.id))
-
     if @comment.save
+
       respond_to do |format|
+        @current_user = current_user
+        
         format.html { redirect_to user_event_path(@event), notice: 'Record successfully created.' }
         format.turbo_stream
       end
@@ -24,6 +26,8 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
+        @current_user = current_user
+
         redirect_to user_event_path(@event), notice: 'Record updated successfully.'
         format.turbo_stream
       else
@@ -34,6 +38,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
+    @current_user = current_user
 
     respond_to do |format|
       format.html { redirect_to user_event_path(@event), notice: 'Record deleted successfully.' }

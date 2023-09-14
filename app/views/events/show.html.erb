@@ -20,56 +20,101 @@
   </div>
 </div>
 <%= turbo_frame_tag Participant.new %>
-<div class="bg-white  my-3 p-3">
-  <div class="w-75 m-auto">
-    <div class="my-1 text-muted d-flex mb-3">
-      <p><i class="fa-solid fa-calendar-days me-2"></i><%= @event.date.strftime("%A, %d %b %Y") %></p>
-      <p class="ms-3"><i class="fa-solid fa-clock fa-beat me-2"></i><%= @event.time.strftime("%I:%M %p") %></p>
-      <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= @event.duration %> hrs</p>
-    </div>
-    <h2 class="my-3"><%= @event.title %></h2>
-    <p class="lead my-2"><%= @event.description %></p>
-    <div class="mb-1 text-muted">
-      <span class="badge bg-success text-white"><%= @event.status.capitalize %></span>
-      <% if @event.visibility == 'event_public' %>
-        <span class="badge bg-primary text-white"><i class="fa-solid fa-lock-open me-2"></i>Public</span>
-      <% elsif @event.visibility == 'event_private' %>
-        <span class="badge bg-primary text-white"><i class="fa-solid fa-lock me-2"></i>Private</span>
-      <% elsif @event.visibility == 'event_presenter' %>
-        <span class="badge bg-primary text-white"><i class="fa-solid fa-users me-2"></i>Presenter</span>
-      <% end %>
-    </div>
-    <div class="mb-1 fw-bold my-2"><i class="fa-solid fa-location-dot me-2"></i><%= @event.location %></div>
-    <%= image_tag url_for(@event.cover_picture), class: 'img-fluid w-100 my-3' %>
-    <div class="my-2 lead"><%= @event.content %></div>
-    <%# Materials list %>
-    <div class="my-3">
-      <%= turbo_frame_tag "event_materials" do %>
-        <ul class="list-group">
-          <% @event.materials.each do |material| %>
-            <%= turbo_frame_tag "event_material_#{material.id}" do %>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <%= material.filename %>
-                <div class="col-4 button-list">
-                  <%= link_to rails_blob_path(material, disposition: 'attachment'), class: 'btn btn-sm btn-primary mb-1' do %>
-                    <i class="fa-solid fa-download bi me-2"></i>
-                    Download
-                  <% end %>
-                  <%= link_to rails_blob_path(material, disposition: 'preview'), class: 'ms-2 btn btn-sm btn-primary mb-1' do %>
-                    <i class="fa-solid fa-expand bi me-2"></i>
-                    View
-                  <% end %>
-                  <%# Delte material %>
-                  <% if current_user.admin? || current_user.presenter? %>
-                    <%= link_to delete_material_path(@event.id, material.id), class: "btn btn-sm btn-default bajra-text-primary me-2", data: { "turbo-method": :delete, confirm: 'Are you sure?' } do %>
-                      <i class="fa-solid fa-trash"></i>
+<div class="bg-white  my-3 p-3 d-flex">
+  <div>
+    <div class="w-75 m-auto">
+      <div class="my-1 text-muted d-flex mb-3">
+        <p><i class="fa-solid fa-calendar-days me-2"></i><%= @event.date.strftime("%A, %d %b %Y") %></p>
+        <p class="ms-3"><i class="fa-solid fa-clock fa-beat me-2"></i><%= @event.time.strftime("%I:%M %p") %></p>
+        <p class="ms-3"><i class="fa-solid fa-hourglass-start me-2"></i><%= @event.duration %> hrs</p>
+      </div>
+      <h2 class="my-3"><%= @event.title %></h2>
+      <p class="lead my-2"><%= @event.description %></p>
+      <div class="mb-1 text-muted">
+        <span class="badge bg-success text-white"><%= @event.status.capitalize %></span>
+        <% if @event.visibility == 'event_public' %>
+          <span class="badge bg-primary text-white"><i class="fa-solid fa-lock-open me-2"></i>Public</span>
+        <% elsif @event.visibility == 'event_private' %>
+          <span class="badge bg-primary text-white"><i class="fa-solid fa-lock me-2"></i>Private</span>
+        <% elsif @event.visibility == 'event_presenter' %>
+          <span class="badge bg-primary text-white"><i class="fa-solid fa-users me-2"></i>Presenter</span>
+        <% end %>
+      </div>
+      <div class="mb-1 fw-bold my-2"><i class="fa-solid fa-location-dot me-2"></i><%= @event.location %></div>
+      <%= image_tag url_for(@event.cover_picture), class: 'img-fluid w-100 my-3' %>
+      <div class="my-2 lead"><%= @event.content %></div>
+      <%# Materials list %>
+      <div class="my-3">
+        <%= turbo_frame_tag "event_materials" do %>
+          <ul class="list-group">
+            <% @event.materials.each do |material| %>
+              <%= turbo_frame_tag "event_material_#{material.id}" do %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <%= material.filename %>
+                  <div class="col-4 button-list">
+                    <%= link_to rails_blob_path(material, disposition: 'attachment'), class: 'btn btn-sm btn-primary mb-1' do %>
+                      <i class="fa-solid fa-download bi me-2"></i>
+                      Download
                     <% end %>
-                  <% end %>
-                </div>
-              </li>
+                    <%= link_to rails_blob_path(material, disposition: 'preview'), class: 'ms-2 btn btn-sm btn-primary mb-1' do %>
+                      <i class="fa-solid fa-expand bi me-2"></i>
+                      View
+                    <% end %>
+                    <%# Delte material %>
+                    <% if current_user.admin? || current_user.presenter? %>
+                      <%= link_to delete_material_path(@event.id, material.id), class: "btn btn-sm btn-default bajra-text-primary me-2", data: { "turbo-method": :delete, confirm: 'Are you sure?' } do %>
+                        <i class="fa-solid fa-trash"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
-      <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+    <section class="mt-5 mb-5 w-75 m-auto">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Comments</h2>
+        <%= link_to "Comment",
+        new_comment_path(@event),
+        data: {
+          turbo_frame: dom_id(Comment.new)
+        } %>
+      </div>
+      <hr>
+      <%= turbo_frame_tag Comment.new %>
+      <div class="d-flex justify-content-center row">
+        <div class="d-flex flex-column col-md-12">
+          <div class="coment-bottom bg-white p-2 px-4">
+            <% render template: "comments/new" %>
+            <%= turbo_frame_tag "comments" do %>
+              <%= render @comments %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="w-25 m-3">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Participants (<%= @event.attendees.count %>)
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <ul class="list-group list-group-flush">
+              <%= turbo_frame_tag "participants" do %>
+                <%= render partial: 'pages/shared/participant', local: {attendees: @attendees} %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>

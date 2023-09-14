@@ -1,8 +1,9 @@
 <div class="d-flex flex-row add-comment-section mt-4 mb-4 w-100">
-
-  <%= image_tag (url_for(current_user.avatar)),
+  <% if current_user.avatar.attached? %>
+    <%= image_tag (url_for(current_user.avatar)),
   style: "width: 38px; height: 38px; object-fit: cover;",
   class: "img-fluid img-responsive rounded-circle me-2" %>
+  <% end %>
   <% if @comment.persisted? %>
     <%= form_with(model: @comment, class: 'd-flex w-100', method: @comment.persisted? ? :patch : :post, url: @comment.persisted? ? comment_url(@event.id, @comment) : update_comment_url(@event.id)) do |form| %>
       <div class="form-group w-100">

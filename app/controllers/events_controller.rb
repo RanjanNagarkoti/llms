@@ -6,7 +6,11 @@ class EventsController < ApplicationController
     @pagy, @events = pagy(Event.all.order(created_at: :desc))
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+    @comments = @event.comments.where(parent_id: nil)
+    @attendees = @event.attendees
+  end
 
   def new
     @event = Event.new

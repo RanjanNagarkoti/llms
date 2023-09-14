@@ -18,9 +18,11 @@
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">
           <% if user_signed_in? %>
-            <div class="d-flex align-items-center">
-              <% if !current_user.avatar.attached? %>
-                <span
+            <div class="dropdown d-flex">
+              <div class="nav-item dropdown">
+                <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <% if !current_user.avatar.attached? %>
+                    <span
                   class="
                     me-2
                     p-2
@@ -30,10 +32,18 @@
                   "
                   style="background-color: #FBDCD3; color: #BE263B;"
                 >
-                  <%= current_user.first_name.capitalize()[0] %><%= current_user.last_name.capitalize()[0] %></span>
-              <% else %>
-                <%= image_tag url_for(current_user.avatar), class: "rounded-pill", style: "width: 35px; height: 35px; object-fit: cover;" %>
-              <% end %>
+                      <%= current_user.first_name.capitalize()[0] %><%= current_user.last_name.capitalize()[0] %></span>
+                  <% else %>
+                    <%= image_tag url_for(current_user.avatar), class: "rounded-pill", style: "width: 35px; height: 35px; object-fit: cover;" %>
+                  <% end %>
+                  <%= current_user.username %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" type="button"><i class="fa-solid fa-id-badge bi me-2"></i>Profile</button></li>
+                  <li><button class="dropdown-item" type="button"><i class="fa-solid fa-list me-2"></i>Attended Events</button></li>
+                  <li><button class="dropdown-item" type="button"><i class="fa-solid fa-calendar-check bi me-2"></i>My Events</button></li>
+                </ul>
+              </div>
               <%= button_to destroy_user_session_path, class: "btn btn-default display-2", method: :delete do %>
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Logout

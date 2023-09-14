@@ -31,7 +31,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem 'redis', '~> 5.0', '>= 5.0.7'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -60,6 +60,10 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 # Pagination
 gem 'pagy', '~> 6.0', '>= 6.0.4'
 
+# Sidekiq for bakcground jobs
+gem 'sidekiq', '~> 7.1', '>= 7.1.4'
+gem 'sidekiq-scheduler', '~> 5.0', '>= 5.0.3'
+gem 'sidekiq-cron', '~> 1.10', '>= 1.10.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

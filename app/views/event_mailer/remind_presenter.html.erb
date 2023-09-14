@@ -1,0 +1,20 @@
+<div class="container mt-5">
+  <h1 class="mb-4">You're Presenting in 30 Minutes!</h1>
+  <div class="mb-3">
+    <p>Dear <%= @presenter_detail.first_name.capitalize() %> <%= @presenter_detail.last_name.capitalize() %>,</p>
+    <p>We wanted to remind you that your presentation for the event "<%= @event.title %>" is scheduled to begin in just 30 minutes. Please make sure you are prepared and ready to go.</p>
+    <p><strong>Event Details:</strong></p>
+    <ul>
+      <li><strong>Event Name:</strong> <%= @event.title %></li>
+      <li><strong>Date:</strong> <%= @event.date.strftime('%B %d, %Y') %></li>
+      <li><strong>Time:</strong> <%= @event.time.strftime('%I:%M %p') %></li>
+      <li><strong>Location:</strong> <%= @event.location %></li>
+    </ul>
+    <p>If you have any last-minute preparations or need assistance, please reach out to the event organizers immediately.</p>
+    <p>We wish you the best of luck with your presentation!</p>
+  </div>
+  <div class="text-muted">
+    <p>Warm regards,</p>
+    <p>Your LLMS!</p>
+  </div>
+</div>

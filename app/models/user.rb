@@ -30,8 +30,6 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, format: { with: /\A(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':",.<>?])[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':",.<>?]+\z/,
                                                          message: 'should include at least one number, one uppercase letter, and one special character' }
 
-  validates :avatar, presence: { message: 'is required!' }
-
   private
 
   def send_welcome_email

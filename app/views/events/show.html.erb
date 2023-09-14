@@ -73,3 +73,26 @@
       <% end %>
     </div>
   </div>
+  <section class="mt-5 mb-5 w-75 m-auto">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Comments</h2>
+      <%= link_to "Comment",
+        new_comment_path(@event),
+        data: {
+          turbo_frame: dom_id(Comment.new)
+        } %>
+    </div>
+    <hr>
+    <%= turbo_frame_tag Comment.new %>
+    <div class="d-flex justify-content-center row">
+      <div class="d-flex flex-column col-md-12">
+        <div class="coment-bottom bg-white p-2 px-4">
+          <% render template: "comments/new" %>
+          <%= turbo_frame_tag "comments" do %>
+            <%= render @comments %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

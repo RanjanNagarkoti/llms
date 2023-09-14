@@ -30,4 +30,15 @@ class PagesController < ApplicationController
     @presenter = @event.participants.where(user_id: current_user.id, presenter: true).first
     @attendees = @event.attendees
   end
+
+  def filter_event
+    status = params[:status]
+
+    @pagy, @upcomings = pagy(
+      Event.where(visibility: 'event_public', status: status)
+      .order(date: :asc, time: :asc)
+    )
+
+    render :filter
+  end
 end

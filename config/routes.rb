@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   resources :events, only: %i[index] do
     resources :participants, only: %i[new create destroy]
   end
+
+  get '/events/all/status', to: 'pages#filter_event', as: :event_filter
 end

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
     if current_user.admin?
-      redirect_to root_path # Redirect admins to their dashboard
+      redirect_to admin_home_path # Redirect admins to their dashboard
     else
       redirect_to user_home_path # Redirect regular users to their dashboard
     end
@@ -35,7 +35,7 @@ class PagesController < ApplicationController
     status = params[:status]
 
     @pagy, @upcomings = pagy(
-      Event.where(visibility: 'event_public', status: status)
+      Event.where(visibility: 'event_public', status:)
       .order(date: :asc, time: :asc)
     )
 

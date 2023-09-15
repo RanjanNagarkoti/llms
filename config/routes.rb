@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
 
     resources :events
+    get '/events', to: 'events#index', as: :admin_home
   end
 
   # Routes for users & presenters

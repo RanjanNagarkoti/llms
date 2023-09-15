@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :type do
-    name { "MyString" }
+    name { 'Ruby on Rails' }
   end
 end

@@ -27,8 +27,10 @@ class User < ApplicationRecord
               end
             }
 
-  validates :password, length: { minimum: 8 }, format: { with: /\A(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':",.<>?])[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':",.<>?]+\z/,
-                                                         message: 'should include at least one number, one uppercase letter, and one special character' }
+  validates :password, format: {
+    with: /\A(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':",.<>?]).{8,}\z/,
+    message: 'should include at least one number, one uppercase letter, and one special character, and be at least 8 characters long'
+  }
 
   private
 
